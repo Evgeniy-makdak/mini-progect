@@ -1,0 +1,59 @@
+{% include 'category/base.html' %}
+{% block content %}
+    <div class="row mt-4 ml-3 mr-3">
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col">
+                    {% if view.object.preview %}
+                        <img class="card-img-top" style="height: 100px;width: 150px;"
+                             src="/media/{{ view.object.preview }}" alt="логотип">
+                    {% else %}
+                        <img class="card-img-top" style="height: 100px;width: 150px;" src="/media/category/logogo.jpg"
+                             alt="логотип">
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ view.object.name }}</h5>
+                        <p class="card-text">{{ view.object.description }}</p>
+                    </div>
+                </div>
+                <div class="col mt-2">
+                    <p><a href="{% url 'category:cat-crib-create' view.object.pk %}"
+                          class="btn btn-primary">добавить</a></p>
+                    <p><a href="{% url 'category:update' view.object.pk %}" class="btn btn-primary">изменить</a></p>
+                    <p><a href="{% url 'category:delete' view.object.pk %}" class="btn btn-primary">удалить</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row mt-1 ml-1 mr-1">
+        {% if object_list %}
+            {% for item in object_list %}
+                <div class="col-4 mb-2">
+                    <div class="card">
+                        <div class="row g-0 ml-1 mb-1">
+                            <div class="col-md-3 align-self-center">
+                                <a href="{% url 'category:crib-detail' item.pk %}"
+                                   class="btn btn-primary">{{ item.name }}</a>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <p class="card-text">{{ item.description|slice:15 }}...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card-body">
+                <p class="card-text">не найдено ни одной шпаргалки данной категории</p>
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% include 'category/base.html' %}
+
+{% block content %}
+    <div class="row-10 ml-3 mr-3 mt-4">
+        <div class="card">
+
+            <div class="card-header">
+                {{ object.name }}
+                (<a href="{% url 'category:cat-crib-list' object.category.pk %}" >{{ object.category.name }}</a>)
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>{{ object.description }}</p>
+                </blockquote>
+            </div>
+            <div class="row ml-3 mb-3">
+
+                <a href="{% url 'category:crib-update' object.pk %}" class="btn btn-primary mr-3">изменить</a>
+
+                <a href="{% url 'category:crib-delete' object.pk %}" class="btn btn-primary">удалить</a>
+
+            </div>
+
+        </div>
+    </div>
+    <hr>
+
+{% endblock %}
